@@ -22,7 +22,7 @@ echo $fpath
 $fous = Import-Csv $fpath
 
 #Create OU's within the Active Directory forest by looping throughout each row within the CSV file.
-foreach ($row in $ouData) {
+foreach ($row in $fous) {
         # Get the name of the OU from the CSV
         $ouName = $row.Name
 
@@ -36,4 +36,6 @@ foreach ($row in $ouData) {
             Write-Host "OU '$ouName' already exists, proceeding to next entry."
         }
     }
+} else {
+ Write-Host "The specified CSV file does not exist."
 }
