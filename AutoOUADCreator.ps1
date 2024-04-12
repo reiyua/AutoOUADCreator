@@ -27,7 +27,7 @@ foreach ($row in $fous) {
         $ouName = $row.Name
 
         # Check if the OU already exists
-        if (-not (Get-ADOrganizationalUnit -Filter {Name -eq $ouName})) {
+       if (-not (Get-ADOrganizationalUnit -Filter "Name -eq '$ouName'")) {
             # Create the OU
             New-ADOrganizationalUnit -Name $ouName -Path "DC=alphadelta,DC=com" -ErrorAction SilentlyContinue
             Write-Host "OU '$ouName' created successfully."
