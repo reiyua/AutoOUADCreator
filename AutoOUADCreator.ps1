@@ -7,18 +7,8 @@
 #Import the Active Directory module to allow modifcations to the forest.
 import-module ActiveDirectory
 
-
-
 #Get user to specify path of the CSV file containing OU names to be added into the Active Directory.
 $fpath = Read-Host -Prompt "Please enter the path to your CSV file containing OU info to be added within the Active Directory Domain Forest:"
-
-
-# Check if CSV file exists with the path specified by the end-user
-# If so, error out the program with generic error stating so. (RAYYAN Contribution)
-# This uses the "Test-Path" cmdlet which tests if the path actually exists and can be read by the system.
-# Source for code (https://www.itechguides.com/powershell-check-if-file-exists/#:~:text=If%20(Test%2DPath%20%2DPath%20E%3A%5Creports%5Cprocesses.txt%20)%20%7B%0ACopy%2DItem%20%2DPath%20E%3A%5Creports%5Cprocesses.txt%20%2DDestination%20C%3A%5Creports%0A%7D)
-
-}
 
 # Display path to file given by end-user
 echo $fpath
@@ -41,7 +31,7 @@ foreach ($row in $ouData) {
             Write-Host "OU '$ouName' already exists, proceeding to next entry."
         }
     }
-    # Basic check 
+    # Basic check if CSV file actually exists and can be read
 } else {
     Write-Host "CSV file not found at $csvPath"
 }
