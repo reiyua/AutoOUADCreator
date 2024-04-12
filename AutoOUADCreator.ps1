@@ -40,3 +40,4 @@ foreach ($row in $ouData) {
  else {
     Write-Host "CSV file not found at $csvPath"
 }
+}
