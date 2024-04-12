@@ -8,7 +8,7 @@
 import-module ActiveDirectory
 
 #Get user to specify path of the CSV file containing OU names to be added into the Active Directory.
-$fpath = Read-Host -Prompt "Please enter the path to your CSV file containing OU info to be added within the Active Directory Domain Forest:"
+$fpath = Read-Host -Prompt "Please enter the path to your CSV file containing OU info to be added within the Active Directory Domain Forest"
 
 # Display path to file given by end-user
 echo $fpath
