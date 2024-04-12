@@ -32,6 +32,6 @@ foreach ($row in $ouData) {
         }
     }
     # Basic check if CSV file actually exists and can be read
-} else {
+ else {
     Write-Host "CSV file not found at $csvPath"
 }
