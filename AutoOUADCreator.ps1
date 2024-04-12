@@ -26,6 +26,9 @@ foreach ($row in $fous) {
         # Get the name of the OU from the CSV
         $ouName = $row.Name
 
+        # Get all existing OUs in the specified path
+    $existingOUs = Get-ADOrganizationalUnit -Filter * -SearchBase "DC=alphadelta,DC=com" | Select-Object -ExpandProperty Name
+
         # Check if the OU already exists
     if (-not (Get-ADOrganizationalUnit -LDAPFilter "(Name=$ouName)")) {
             # Create the OU
