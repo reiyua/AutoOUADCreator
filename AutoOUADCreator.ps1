@@ -36,8 +36,4 @@ foreach ($row in $ouData) {
             Write-Host "OU '$ouName' already exists, proceeding to next entry."
         }
     }
-    # Basic check if CSV file actually exists and can be read
- else {
-    Write-Host "CSV file not found at $csvPath"
-}
 }
