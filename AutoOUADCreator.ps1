@@ -2,7 +2,7 @@
 # Contact: rayyan.hodges@studytafensw.edu.au
 # Program Name: AutoOUADCreator
 # Purpose of script: Create a batch set of OU' using a CSV file within an existing Active Directory Forest.
-# Extra Notes: Modify line 37 with appropriate domain info. (AlphaDelta.com is used in this scenario)
+# Extra Notes: Modify line 37 and 59 with appropriate domain info. (AlphaDelta.com is used in this scenario)
 
 #Import the Active Directory module to allow modifcations to the forest.
 import-module ActiveDirectory
@@ -29,13 +29,16 @@ echo $fpath
 #Create OU's within the Active Directory forest by looping throughout each row within the CSV file.
 foreach ($row in $fous) {
         # Get the name of the OU from the CSV
-        $ouName = $row.Name
+        $ouName = $row.ouName
+
+        # Debug output - Check if program is actually reading CSV containing OU names.
+        Write-Host "Processing OU name: '$ouName'"
 
         # Ensure $ouName is not null or empty
         if (-not [string]::IsNullOrWhiteSpace($ouName)) {
 # Get all existing OUs in the specified path
             try {
-                $existingOUs = Get-ADOrganizationalUnit -Filter * -SearchBase "DC=PSTest,DC=local" | Select-Object -ExpandProperty Name
+                $existingOUs = Get-ADOrganizationalUnit -Filter * -SearchBase "DC=alphadelta,DC=com" | Select-Object -ExpandProperty Name
             } catch {
                 Write-Host "Error retrieving existing OUs: $_"
                 exit
@@ -50,10 +53,10 @@ foreach ($existingOU in $existingOUs) {
     }
 }
 
-i if (-not $ouExists) {
+if (-not $ouExists) {
                 # Create the OU
                 try {
-                    New-ADOrganizationalUnit -Name $ouName -Path "DC=PSTest,DC=local" -ErrorAction Stop
+                    New-ADOrganizationalUnit -Name $ouName -Path "DC=alphadelta,DC=com" -ErrorAction Stop
                     Write-Host "OU '$ouName' created successfully."
                 } catch {
                     Write-Host "Error creating OU '$ouName': $_"
